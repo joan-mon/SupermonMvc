@@ -20,11 +20,6 @@ class Autoloader
         {
             require_once $include_class;
         }
-        else
-        {
-            throw new Exception( 'Class ' . $include_class_name . ' not Found' );
-        }
-       
     }
     
     protected function _fileExistsOnIncludePaths($file)
