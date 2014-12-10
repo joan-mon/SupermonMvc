@@ -23,11 +23,14 @@ class Uri
         $this->_where[$param] = $regex;
     }
     
-    public function match($uri)
+    public function match( $request_uri )
     {
+        
+        list($uri,) = explode('?', $request_uri);
+        
         $this->_uri = preg_replace_callback('/\{(.+)\}/U', array($this, 'replaceCallback') , $this->_uri);
 
-        $res = preg_match( '/'. $this->escapeSlash( $this->_uri ) . '/', trim( $uri, '/' ), $this->_matches);
+        $res = preg_match( '/^'. $this->escapeSlash( $this->_uri ) . '$/', trim( $uri, '/' ), $this->_matches);
         
         return (bool)$res;
     }
@@ -47,7 +50,7 @@ class Uri
         return $this->_action;
     }
 
-    public function replaceCallback($matched)
+    public function replaceCallback( $matched )
     {
         $param = $matched[1];
         $template = '(?P<%s>%s)';

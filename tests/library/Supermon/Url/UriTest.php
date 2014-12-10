@@ -50,4 +50,9 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $this->assertTrue($uri->getController() === 'test');
         $this->assertTrue($uri->getAction() === 'test');
     }
+    public function testMatchUriWithQueryString()
+    {
+        $uri = new Uri('test', 'test', 'test');
+        $this->assertTrue($uri->match('/test/?param=param'));
+    }
 }
