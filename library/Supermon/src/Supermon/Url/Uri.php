@@ -40,12 +40,12 @@ class Uri
         return $this->_matches;
     }
 
-    public function getController()
+    public function getControllerName()
     {
         return $this->_controller;
     }
 
-    public function getAction()
+    public function getActionName()
     {
         return $this->_action;
     }

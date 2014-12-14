@@ -32,7 +32,7 @@ class RouteTest extends \PHPUnit_Framework_TestCase
         
         $this->prepareServerParams('test/1234');
         $this->assertInstanceOf('Supermon\Url\Uri', $var_uri = Route::match(new \Supermon\Http\Request() ) );
-        $this->assertEquals('testvar', $var_uri->getController());
+        $this->assertEquals('testvar', $var_uri->getControllerName());
     }
     
     private function prepareServerParams($request_uri, $mehtod = 'GET')

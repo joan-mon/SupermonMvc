@@ -14,10 +14,10 @@ class Controller
     public $response;
 
 
-    public function __construct( Http\Request $request )
+    public function __construct( Http\Request &$request, Http\Response &$response )
     {
         $this->_request = $request;
-        $this->_response = new Http\Response();
+        $this->_response = $response;
         $this->init();
     }
 

@@ -47,12 +47,17 @@ class UriTest extends \PHPUnit_Framework_TestCase
         $matches = $uri->getMatches();
         $this->assertTrue($matches['var1'] == 'SuperMon');
         $this->assertTrue($matches['var2'] == 1234);
-        $this->assertTrue($uri->getController() === 'test');
-        $this->assertTrue($uri->getAction() === 'test');
+        $this->assertTrue($uri->getControllerName() === 'test');
+        $this->assertTrue($uri->getActionName() === 'test');
     }
     public function testMatchUriWithQueryString()
     {
         $uri = new Uri('test', 'test', 'test');
         $this->assertTrue($uri->match('/test/?param=param'));
+    }
+    public function testLongerUriThatMatchPartiallyMustFail()
+    {
+         $uri = new Uri('test', 'test', 'test');
+         $this->assertFalse($uri->match('/test/blabla'));
     }
 }
