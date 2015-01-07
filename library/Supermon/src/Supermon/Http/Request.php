@@ -22,7 +22,7 @@ class Request
     
     public function isPost()
     {
-        return $_SERVER['REQUEST_METHOD'] === 'POST';
+        return $this->_server['REQUEST_METHOD'] === 'POST';
     }
     
     public function getParams()

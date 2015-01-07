@@ -28,7 +28,11 @@ class Uri
         
         list($uri,) = explode('?', $request_uri);
         
-        $this->_uri = preg_replace_callback('/\{(.+)\}/U', array($this, 'replaceCallback') , $this->_uri);
+        $this->_uri = preg_replace_callback(
+                '/\{(.+)\}/U', 
+                array($this, 'replaceSpecialMatchesByRegularExpression') , 
+                $this->_uri
+        );
 
         $res = preg_match( '/^'. $this->escapeSlash( $this->_uri ) . '$/', trim( $uri, '/' ), $this->_matches);
         
@@ -50,13 +54,12 @@ class Uri
         return $this->_action;
     }
 
-    public function replaceCallback( $matched )
+    private function replaceSpecialMatchesByRegularExpression( $matched )
     {
         $param = $matched[1];
-        $template = '(?P<%s>%s)';
-        $regex = isset( $this->_where[$param] ) ? $this->_where[$param] : '[^/]+';        
+        $regex = isset( $this->_where[$param] ) ? $this->_where[$param] : '.*';        
 
-        return sprintf( $template, $param, $regex);
+        return sprintf('(?P<%s>%s)', $param, $regex);
     }
     
     private function escapeSlash($str)

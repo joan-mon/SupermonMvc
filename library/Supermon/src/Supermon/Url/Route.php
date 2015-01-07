@@ -5,9 +5,7 @@ namespace Supermon\Url;
 class Route
 {
     private static $_get = [];
-    private static $_get_routes = 0;
     private static $_post = [];
-    private static $_post_routes = 0;
     
     /**
      * @var \Supermon\Url\Uri
@@ -22,8 +20,7 @@ class Route
      */
     public static function get( $uri, $controller, $action )
     {
-        $position = self::$_get_routes++;
-        return self::$_get[$position] = new \Supermon\Url\Uri( $uri, $controller, $action );
+        return self::$_get[] = new \Supermon\Url\Uri( $uri, $controller, $action );
     }
     
     /**
@@ -34,8 +31,7 @@ class Route
      */
     public static function post( $uri, $controller, $action )
     {
-        $position = self::$_post_routes++;
-        return self::$_post[$position] = new \Supermon\Url\Uri( $uri, $controller, $action );
+        return self::$_post[] = new \Supermon\Url\Uri( $uri, $controller, $action );
     }
 
     /**

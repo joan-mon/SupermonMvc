@@ -2,14 +2,17 @@
 
 namespace Mvc\Controllers;
 
+use \Supermon\View;
+
 class IndexController extends \Supermon\Controller
 {
     public function indexAction()
     {
-        return 'hola mundo!';
+        return View::render('index/index.phtml');
     }
-    public function homeAction( $uri )
+    public function blogNameAction( $name )
     {
-        return $uri;
+       View::set('name', $name);
+       return View::render('index/blogName.phtml');
     }
 }

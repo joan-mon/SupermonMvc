@@ -11,3 +11,6 @@ $autoloader = new \Supermon\Autoloader(array(
 spl_autoload_register(array($autoloader, 'autoload'));
 
 require_once  __DIR__ . '/Routes.php';
+
+
+\Supermon\View::setBasePath(APP_PATH . '/Skeleton/src/Mvc/Views');

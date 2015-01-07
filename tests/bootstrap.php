@@ -11,4 +11,6 @@ $autoloader = new \Supermon\Autoloader(array(
     APP_PATH . '/../library/Supermon/src'
 ));
 
+//global $autoloader;
+
 spl_autoload_register( array( $autoloader, 'autoload' ) );

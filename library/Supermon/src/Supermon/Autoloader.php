@@ -4,11 +4,14 @@ namespace Supermon;
 
 class Autoloader
 {
+    private $_include_paths = [];
+    
     public function __construct( array $paths_namespaces = array() )
     {
         foreach ($paths_namespaces as $path)
         {
-            set_include_path(get_include_path() . PATH_SEPARATOR . realpath( $path ) );
+            $path = realpath($path);
+            $this->_include_paths[$path] = $path;
         }
     }
     
@@ -24,9 +27,7 @@ class Autoloader
     
     protected function _fileExistsOnIncludePaths($file)
     {
-        $include_paths = explode( PATH_SEPARATOR, get_include_path());
-        
-        foreach ( $include_paths as $path ) 
+        foreach ( $this->_include_paths as $path ) 
         {
             $include_class = $path . '/' . $file;
             
